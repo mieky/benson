@@ -1,0 +1,26 @@
+{
+  "name": "benson",
+  "version": "0.0.1",
+  "description": "private event invites",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mieky/benson.git"
+  },
+  "author": "Mike Arvela <mike@arvela.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mieky/benson/issues"
+  },
+  "homepage": "https://github.com/mieky/benson",
+  "jspm": {
+    "directories": {
+      "baseURL": "app",
+      "lib": "app",
+      "packages": "app/jspm_packages"
+    }
+  }
+}
