@@ -4,10 +4,12 @@
     <title>benson</title>
 </head>
 <body>
+    <div id="main"></div>
     <script src="jspm_packages/system.js"></script>
     <script src="config.js"></script>
     <script>
-        System.import('lib/main');
+        System.transpiler = 'babel';
+        System.import("js/app.jsx!");
     </script>
 </body>
 </html>

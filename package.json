@@ -21,6 +21,14 @@
       "baseURL": "app",
       "lib": "app",
       "packages": "app/jspm_packages"
+    },
+    "dependencies": {
+      "jsx": "github:floatdrop/plugin-jsx@^0.1.1",
+      "react": "npm:react@^0.12.2",
+      "react-router": "npm:react-router@^0.12.4"
     }
+  },
+  "devDependencies": {
+    "jspm": "^0.14.0"
   }
 }
