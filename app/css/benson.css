@@ -1,0 +1,25 @@
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    font-size: 16px;
+}
+
+h1, h2 {
+    margin: 10px 0 15px 0;
+}
+
+.site-header {
+    background-color: #b4d455;
+    color: white;
+    padding: 5px 20px;
+}
+
+    .site-header__tagline {
+        margin-bottom: 10px;
+    }
+
+.content {
+    padding: 15px 20px;
+}
