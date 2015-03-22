@@ -1,4 +1,5 @@
 .DS_Store
+dist
 node_modules
 app/jspm_packages
 app/config.js
