@@ -1,5 +1,6 @@
 .DS_Store
 dist
 node_modules
+app/build.js*
 app/jspm_packages
 app/config.js
