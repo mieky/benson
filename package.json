@@ -4,6 +4,7 @@
   "description": "for those lavish feasts",
   "main": "index.js",
   "scripts": {
+    "build": "jspm bundle-sfx js/app dist/bundle.js --minify --skip-source-maps",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -30,5 +31,9 @@
   },
   "devDependencies": {
     "jspm": "^0.14.0"
+  },
+  "dependencies": {
+    "sequelize": "^2.0.4",
+    "sqlite3": "^3.0.5"
   }
 }
