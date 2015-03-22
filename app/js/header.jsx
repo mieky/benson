@@ -6,7 +6,7 @@ export default React.createClass({
         return (
             <header className="site-header">
                 <h1>benson</h1>
-                <div className="site-header__tagline">private event invites</div>
+                <div className="site-header__tagline"></div>
             </header>
         )
     }
