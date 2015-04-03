@@ -9,7 +9,9 @@ For those lavish feasts!
 
 ## Tech
 
-- jspm + systemjs + babel + es6
+- node v0.12
+- Frontend: jspm + systemjs + babel + es6
+- Backend: sequelize + sqlite
 
 ## Setting up
 
@@ -22,6 +24,7 @@ jspm install
 Also useful:
 
 ```
+npm install -g live-server
 live-server app
 ```
 
