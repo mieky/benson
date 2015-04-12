@@ -37,7 +37,7 @@ live-server app
 
 ```
 npm install -g babel
-babel-node server
+babel-node server/testdata      # or babel-node server
 ```
 
 ## License

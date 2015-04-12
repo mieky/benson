@@ -40,7 +40,7 @@ function createAdventurer(options) {
 
 export function createTestData() {
     // Initialize everything, deleting existing data
-    Promise.all([
+    return Promise.all([
         User.sync({ force: true }),
         Adventure.sync({ force: true }),
         Message.sync({ force: true }),
@@ -67,3 +67,7 @@ export function createTestData() {
         })
         .tap(printOverview);
 };
+
+if (!module.parent) {
+    createTestData();
+}
