@@ -1,3 +1,5 @@
 "use strict";
 
-var db = require("./database");
+var testdata = require("./testdata");
+
+testdata.createTestData();
