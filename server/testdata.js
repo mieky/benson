@@ -5,57 +5,65 @@ let {
     User,
     Adventure,
     Message,
-    UserMessages,
     UserAdventures
 } = require("./model");
+
+function printOverview() {
+    console.log("\n--- users");
+    User.findAll({ include: [Adventure, Message] })
+        .then(users => {
+            users.forEach(user => {
+                console.log(user.get({ plain: true }));
+            });
+        });
+}
+
+function createAdventurer(options) {
+    return User.create({
+        firstName: options.firstName,
+        lastName: options.lastName
+    })
+        .then(user => {
+            return user.addAdventure(options.adventure);
+        })
+        .then(userAdventure => {
+            return Message.create({
+                text: options.firstMessage,
+                UserId: userAdventure.UserId,
+                AdventureId: userAdventure.AdventureId
+            });
+        })
+        .then(() => {
+            return options.adventure;
+        });
+}
 
 export function createTestData() {
     // Initialize everything, deleting existing data
     Promise.all([
-        UserAdventures.sync({ force: true }),
-        UserMessages.sync({ force: true }),
+        User.sync({ force: true }),
         Adventure.sync({ force: true }),
         Message.sync({ force: true }),
-        User.sync({ force: true })
-    ]).then(() => {
-        return Adventure.create({ name: "A grand voyage" });
-    }).then(adventure => {
-        return User.create({
-            firstName: "Frank",
-            lastName: "Ballston"
-        }).then(user => {
-            return user.addAdventure(adventure);
-        }).then(user => {
-            return Message.create({
-                text: "Hello world",
-                UserId: 1,
-                AdventureId: 1
-            }).then(msg => {
-                console.log("A:", adventure.get({ plain: true }));
-                console.log("U:", user.get({ plain: true }));
-                console.log("M:", msg.get({ include: [Adventure, User]}));
-                // console.log(msg.get({ plain: true }));
-                // msg.setUser(user).then(() => {
-                //     console.log("msg", msg.get({ plain: true }));
-                // });
-                // msg.setAdventure(adventure);
+        UserAdventures.sync({ force: true })
+    ])
+        .then(() => {
+            return Adventure.create({ name: "A grand voyage" });
+        })
+        .then(adventure => {
+            return createAdventurer({
+                firstName: "Frank",
+                lastName: "Ballston",
+                adventure: adventure,
+                firstMessage: "Hi, I'm Frank!"
             });
         })
-        .then(() => {
-            // return User.create({
-            //     firstName: "Adam",
-            //     lastName: "Goggles"
-            // }).then(user => {
-            //     return user.addAdventure(adventure);
-            // });
-        });
-    }).then(() => {
-        console.log("\n--- users");
-        User.findAll({ include: [Adventure] })
-            .then(users => {
-                users.forEach(user => {
-                    console.log(user.get({ plain: true }));
-                });
+        .then(adventure => {
+            return createAdventurer({
+                firstName: "Adam",
+                lastName: "Goggles",
+                adventure: adventure,
+                firstMessage: "Hello everybody."
             });
-    });
+        })
+        .tap(printOverview);
 };

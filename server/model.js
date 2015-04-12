@@ -4,7 +4,7 @@ const path = require("path");
 let sequelize = new Sequelize(null, null, null, {
     dialect: "sqlite",
     storage: path.resolve(".", "database.sqlite"),
-    logging: true
+    logging: false
 });
 
 let User = sequelize.define("User", {
@@ -21,13 +21,12 @@ let Message = sequelize.define("Message", {
 });
 
 let UserAdventures = sequelize.define("UserAdventures", {});
-let UserMessages = sequelize.define("UserMessages", {});
 
 User.belongsToMany(Adventure, { through: "UserAdventures" });
-Adventure.belongsToMany(User, { through: "UserAdventures" });
+Adventure.hasMany(User, { through: "UserAdventures" });
 
-User.hasMany(Message, { through: "UserMessages" });
-Adventure.hasMany(Message, { through: "UserMessages" });
+User.hasMany(Message);
+Adventure.hasMany(Message);
 
 Message.belongsTo(User);
 Message.belongsTo(Adventure);
@@ -36,6 +35,5 @@ module.exports = {
     User,
     Adventure,
     Message,
-    UserMessages,
     UserAdventures
 };
