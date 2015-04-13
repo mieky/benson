@@ -8,6 +8,18 @@ let {
     UserAdventures
 } = require("./model");
 
+export function getAdventure(id) {
+    return Adventure.find(id);
+}
+
+export function getMessages(adventureId) {
+    return Message.find({
+        where: {
+            AdventureId: adventureId
+        }
+    });
+}
+
 export function getUser(id) {
     return User.find(id);
 }
