@@ -1,9 +1,7 @@
 benson
 ======
 
-For those lavish feasts! Doesn't do anything useful just yet.
-
-<img src="https://github.com/mieky/benson/raw/master/benson.jpg" style="height: 400px" />
+Benson lets you share your adventures. It's like a chatroom, but with a purpose, a start, and an end.
 
 ## Features
 
@@ -13,31 +11,12 @@ For those lavish feasts! Doesn't do anything useful just yet.
 - Frontend: [jspm](http://jspm.io/) + [systemjs](https://github.com/systemjs/systemjs) + maybe React one day
 - Backend: [sequelize](http://sequelize.readthedocs.org/en/latest/) + [sqlite](https://github.com/mapbox/node-sqlite3)
 
-## Setting up
+## Up & running
 
 ```
 npm install
-```
-
-### Front
-
-```
-npm install -g jspm
-jspm install
-```
-
-Also useful:
-
-```
-npm install -g live-server
-live-server app
-```
-
-### Back
-
-```
-npm install -g babel
-babel-node server/testdata      # or babel-node server
+node_modules/.bin/jspm install
+rm database.sqlite ; node_modules/.bin/babel-node server
 ```
 
 ## License
