@@ -18,8 +18,10 @@ Nothing much just yet. Initializes a local database and provides an API for quer
 ```
 npm install
 node_modules/.bin/jspm install
-rm database.sqlite ; node_modules/.bin/babel-node server
+npm start
 ```
+
+**Caution!** `npm start` will destroy your database.sqlite to get a clean slate every time.
 
 Then you can browse to http://localhost:8080/, and:
 
