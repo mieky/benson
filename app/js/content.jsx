@@ -7,6 +7,6 @@ export default class Content extends React.Component {
             <section className="content">
                 <Messages />
             </section>
-        )
+        );
     }
 }
