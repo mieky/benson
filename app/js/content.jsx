@@ -1,12 +1,12 @@
-import React from 'react'
+import React from "react";
+import Messages from "./messages.jsx!";
 
-export default React.createClass({
-    displayName: 'Test',
-    render: function() {
+export default class Content extends React.Component {
+    render() {
         return (
             <section className="content">
-                Benson, tonight we shall have a lavish feast!
+                <Messages />
             </section>
         )
     }
-})
+}

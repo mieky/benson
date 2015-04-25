@@ -19,6 +19,12 @@ node_modules/.bin/jspm install
 rm database.sqlite ; node_modules/.bin/babel-node server
 ```
 
+Then you can browse to http://localhost:8080/, and:
+
+```
+curl -is http://localhost:8080/api/adventure/1/messages -H 'accept: application/json'
+```
+
 ## License
 
 MIT

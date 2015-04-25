@@ -3,11 +3,6 @@
   "version": "0.0.1",
   "description": "for those lavish feasts",
   "main": "index.js",
-  "scripts": {
-    "build": "jspm bundle js/app --inject",
-    "build:deploy": "jspm bundle-sfx js/app dist/bundle.js --minify --skip-source-maps",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/mieky/benson.git"
@@ -18,22 +13,6 @@
     "url": "https://github.com/mieky/benson/issues"
   },
   "homepage": "https://github.com/mieky/benson",
-  "jspm": {
-    "directories": {
-      "baseURL": "app",
-      "lib": "app"
-    },
-    "dependencies": {
-      "jsx": "github:floatdrop/plugin-jsx@^0.1.1",
-      "react": "npm:react@^0.12.2",
-      "react-router": "npm:react-router@^0.12.4"
-    },
-    "devDependencies": {
-      "babel": "npm:babel-core@^5.1.11",
-      "babel-runtime": "npm:babel-runtime@^5.1.11",
-      "core-js": "npm:core-js@^0.8.4"
-    }
-  },
   "devDependencies": {
     "babel": "^5.1.11",
     "bluebird": "^2.9.24",
@@ -46,5 +25,20 @@
     "restify": "^3.0.2",
     "sequelize": "^2.0.5",
     "sqlite3": "^3.0.5"
+  },
+  "jspm": {
+    "directories": {
+      "baseURL": "app"
+    },
+    "dependencies": {
+      "jsx": "github:floatdrop/plugin-jsx@1.1.0",
+      "react": "npm:react@0.13",
+      "react-router": "npm:react-router@0.13"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.1.11",
+      "babel-runtime": "npm:babel-runtime@^5.1.11",
+      "core-js": "npm:core-js@^0.8.4"
+    }
   }
 }

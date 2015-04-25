@@ -1,13 +1,12 @@
-import React from 'react'
+import React from "react";
 
-export default React.createClass({
-    displayName: 'Header',
-    render: function() {
+export default class Header extends React.Component {
+    render() {
         return (
             <header className="site-header">
                 <h1>benson</h1>
                 <div className="site-header__tagline"></div>
             </header>
-        )
+        );
     }
-})
+}
