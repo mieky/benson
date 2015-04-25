@@ -13,10 +13,11 @@ export function getAdventure(id) {
 }
 
 export function getMessages(adventureId) {
-    return Message.find({
+    return Message.findAll({
         where: {
             AdventureId: adventureId
-        }
+        },
+        order: [["createdAt", "DESC"]]
     });
 }
 
