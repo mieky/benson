@@ -17,7 +17,10 @@ export function getMessages(adventureId) {
         where: {
             AdventureId: adventureId
         },
-        order: [["createdAt", "DESC"]]
+        order: [
+            ["createdAt", "DESC"],
+            ["id", "DESC"]
+        ]
     });
 }
 
