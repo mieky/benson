@@ -5,6 +5,8 @@ Benson lets you share your adventures. It's like a chatroom, but with a specific
 
 ## Features
 
+Nothing much just yet. Initializes a local database and provides an API for querying it.
+
 ## Tech
 
 - Node v0.12, [ES6](https://github.com/lukehoban/es6features) with [babel](http://babeljs.io/)
