@@ -31,9 +31,11 @@ export default class Messages extends React.Component {
         this.state = {
             data: []
         };
+        this.loadMessages = this.loadMessages.bind(this);
     }
     componentDidMount() {
         this.loadMessages();
+        setInterval(this.loadMessages, this.props.pollInterval);
     }
     loadMessages() {
         window.fetch("/api/adventure/1/messages")

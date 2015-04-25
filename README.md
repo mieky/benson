@@ -30,7 +30,7 @@ curl -is http://localhost:8080/api/adventure/1/messages -H 'accept: application/
 ## Todo
 
 - [ ] post message
-- [ ] poll for new messages
+- [x] poll for new messages
 - [ ] better styles for messages
 - [ ] use [PostCSS](https://www.google.fi/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0CCAQFjAA&url=https%3A%2F%2Fgithub.com%2Fpostcss%2Fpostcss&ei=lGg7Va-fMuXmyQOHiYC4BA&usg=AFQjCNEteYqCgL4rno4I2giUMwPbX7T5qQ&sig2=OsIqF15mbDHdtlwfdbpHsw&bvm=bv.91665533,d.bGQ) for styles
 - [ ] npm run scripts for eslint + jscs
