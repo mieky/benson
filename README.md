@@ -27,10 +27,17 @@ Then you can browse to http://localhost:8080/, and:
 curl -is http://localhost:8080/api/adventure/1/messages -H 'accept: application/json'
 ```
 
+Posting a message with [httpie](https://github.com/jakubroztocil/httpie):
+
+```
+http POST http://localhost:8080/api/adventure/1/message text="I'm a lumberjack and I'm okay"
+```
+
 ## Todo
 
-- [ ] post message
+- [x] post message
 - [x] poll for new messages
+- [ ] determine sender identity
 - [ ] better styles for messages
 - [ ] use [PostCSS](https://www.google.fi/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0CCAQFjAA&url=https%3A%2F%2Fgithub.com%2Fpostcss%2Fpostcss&ei=lGg7Va-fMuXmyQOHiYC4BA&usg=AFQjCNEteYqCgL4rno4I2giUMwPbX7T5qQ&sig2=OsIqF15mbDHdtlwfdbpHsw&bvm=bv.91665533,d.bGQ) for styles
 - [ ] npm run scripts for eslint + jscs

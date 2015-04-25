@@ -30,4 +30,15 @@ export function getUser(id) {
 
 export function getUsersAsync() {
     return User.findAll();
-};
+}
+
+export function postMessage(id, message) {
+    if (!message.text) {
+        return Promise.reject(new Error("Missing message text"));
+    }
+    return Message.create({
+        text: message.text,
+        UserId: 1,
+        AdventureId: 1
+    });
+}

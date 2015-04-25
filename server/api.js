@@ -24,6 +24,16 @@ export function initialize(server) {
             .then(jsonOr404(req, res, next));
     });
 
+    server.post("/api/adventure/:id/message", (req, res, next) => {
+        service.postMessage(req.params.id, req.body)
+            .then(jsonOr404(req, res, next))
+            .catch(err => {
+                console.log("Error posting message", err);
+                res.status(400);
+                res.json(err);
+            });
+    });
+
     server.get("/api/user/:id", (req, res, next) => {
         service.getUser(req.params.id)
             .then(jsonOr404(req, res, next));

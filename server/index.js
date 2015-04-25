@@ -4,6 +4,7 @@ let restify = require("restify");
 let testdata = require("./testdata");
 
 let server = restify.createServer();
+server.use(restify.bodyParser());
 require("./api").initialize(server);
 
 server.get(/\/?.*/, restify.serveStatic({
