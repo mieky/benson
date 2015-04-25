@@ -29,18 +29,20 @@ export default class Messages extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [
-                { text: "I'm a lumberjack and I'm okay" },
-                { text: "I sleep all night and work all day" },
-                { text: "I cut down trees, I skip and jump" },
-                { text: "I like to press wild flowers" },
-                { text: "I put on women's clothing" },
-                { text: "And hang around in bars" }
-            ]
+            data: []
         };
     }
     componentDidMount() {
-        console.log("componentDidMount: Messages");
+        this.loadMessages();
+    }
+    loadMessages() {
+        window.fetch("/api/adventure/1/messages")
+            .then(res => res.json())
+            .then(json => {
+                this.setState({
+                    data: json
+                });
+            });
     }
     render() {
         return (
