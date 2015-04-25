@@ -1,14 +1,14 @@
 benson
 ======
 
-Benson lets you share your adventures. It's like a chatroom, but with a purpose, a start, and an end.
+Benson lets you share your adventures. It's like a chatroom, but with a specific focus, start, and end.
 
 ## Features
 
 ## Tech
 
-- Node v0.12, babel (ES6)
-- Frontend: [jspm](http://jspm.io/) + [systemjs](https://github.com/systemjs/systemjs) + maybe React one day
+- Node v0.12, [ES6](https://github.com/lukehoban/es6features) with [babel](http://babeljs.io/)
+- Frontend: [jspm](http://jspm.io/) + [systemjs](https://github.com/systemjs/systemjs) + [React](https://github.com/facebook/react)
 - Backend: [sequelize](http://sequelize.readthedocs.org/en/latest/) + [sqlite](https://github.com/mapbox/node-sqlite3)
 
 ## Up & running
