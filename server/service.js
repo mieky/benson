@@ -32,13 +32,22 @@ export function getUsersAsync() {
     return User.findAll();
 }
 
-export function postMessage(id, message) {
+export function postMessage(adventureId, message) {
     if (!message.text) {
         return Promise.reject(new Error("Missing message text"));
+    } else if (!message.userId) {
+        return Promise.reject(new Error("Missing user ID"));
     }
+
     return Message.create({
         text: message.text,
-        UserId: 1,
-        AdventureId: 1
+        UserId: message.userId,
+        AdventureId: adventureId
+    })
+    .catch(err => {
+        if (err.name === "SequelizeForeignKeyConstraintError") {
+            return Promise.reject(new Error("Invalid user or adventure ID"));
+        }
+        return err;
     });
 }

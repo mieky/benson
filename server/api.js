@@ -28,9 +28,9 @@ export function initialize(server) {
         service.postMessage(req.params.id, req.body)
             .then(jsonOr404(req, res, next))
             .catch(err => {
+                console.log(err.name);
                 console.log("Error posting message", err);
-                res.status(400);
-                res.json(err);
+                res.json(400, err);
             });
     });
 
