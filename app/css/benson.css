@@ -51,7 +51,12 @@ h1, h2 {
 }
 
 .message {
-    margin-bottom: 25px;
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.message__content {
+    flex: 1;
 }
 
 .message__author-image {

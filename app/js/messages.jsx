@@ -6,8 +6,10 @@ class Message extends React.Component {
         return (
             <div className="message">
                 <div className="message__author-image"></div>
-                <div className="message__author-name">{this.props.author}</div>
-                <div className="message__text">{this.props.children.toString()}</div>
+                <div className="message__content">
+                    <div className="message__author-name">{this.props.author}</div>
+                    <div className="message__text">{this.props.children.toString()}</div>
+                </div>
             </div>
         );
     }
@@ -67,7 +69,7 @@ export default class Messages extends React.Component {
             .then(res => res.json())
             .then(json => {
                 this.setState({
-                    data: [json].concat(this.state.data)
+                    data: [json].concat(this.state.data.reverse())
                 });
             });
     }
