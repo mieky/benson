@@ -1,10 +1,10 @@
 body {
     font-family: Helvetica, Arial, sans-serif;
     font-weight: 300;
+    font-size: 16px;
+    color: #333;
     margin: 0;
     padding: 0;
-    color: #333;
-    font-size: 16px;
 }
 
 h1, h2 {
@@ -25,6 +25,9 @@ h1, h2 {
 
 .content {
     color: #666;
+}
+
+.messages-list {
     padding: 15px 20px;
 }
 
@@ -40,9 +43,49 @@ h1, h2 {
     float: left;
     margin-right: 15px;
     border-radius: 50%;
+
+    border: 2px solid #b4d455;
 }
 
 .message__author-name {
     font-weight: 400;
-    padding-top: 8px;    
+    padding-top: 8px;
+}
+
+.message-form {
+    display: flex;
+    flex-direction: row;
+
+    padding: 0px 15px;
+}
+
+.message-form__text {
+    flex: 1;
+
+    border: 1px solid #ccc;
+    outline-color: #b4d455;
+    padding: 5px;
+
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    color: #333;
+}
+
+.message-form__submit {
+    margin-left: 10px;
+    height: 100%;
+    width: 80px;
+
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    color: #333;
+
+    background-color: #b4d455;
+    color: white;
+    border: 0;
+    border-radius: 5px;
+    height: 30px;
+    cursor: pointer;
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import MessageForm from "./messageform.jsx!";
 
 class Message extends React.Component {
     render() {
@@ -35,13 +36,14 @@ export default class Messages extends React.Component {
             data: []
         };
         this.loadMessages = this.loadMessages.bind(this);
+        this.handleMessageSubmit = this.handleMessageSubmit.bind(this);
     }
     componentDidMount() {
         this.loadMessages();
         setInterval(this.loadMessages, this.props.pollInterval);
     }
     loadMessages() {
-        window.fetch("/api/adventure/1/messages")
+        fetch("/api/adventure/1/messages")
             .then(res => res.json())
             .then(json => {
                 this.setState({
@@ -49,10 +51,26 @@ export default class Messages extends React.Component {
                 });
             });
     }
+    handleMessageSubmit(msg) {
+        fetch("/api/adventure/1/message", {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "POST",
+            body: JSON.stringify(msg)
+        })
+            .then(res => res.json())
+            .then(json => {
+                this.setState({
+                    data: [json].concat(this.state.data)
+                });
+            });
+    }
     render() {
         return (
             <div className="messages">
                 <MessagesList data={this.state.data} />
+                <MessageForm onSubmit={this.handleMessageSubmit} />
             </div>
         );
     }

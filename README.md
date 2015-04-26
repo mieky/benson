@@ -43,7 +43,7 @@ http POST http://localhost:8080/api/adventure/1/message text="I sleep all night 
 - [ ] validate user and adventure IDs for messages
 - [ ] authenticate sender
 - [ ] fetch messages for a specific adventure ID
-- [ ] better styles for messages
+- [x] better styles for messages
 - [ ] use [PostCSS](https://www.google.fi/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0CCAQFjAA&url=https%3A%2F%2Fgithub.com%2Fpostcss%2Fpostcss&ei=lGg7Va-fMuXmyQOHiYC4BA&usg=AFQjCNEteYqCgL4rno4I2giUMwPbX7T5qQ&sig2=OsIqF15mbDHdtlwfdbpHsw&bvm=bv.91665533,d.bGQ) for styles
 - [ ] npm run scripts for eslint + jscs
 - [ ] Travis CI build
