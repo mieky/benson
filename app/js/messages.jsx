@@ -14,15 +14,20 @@ class Message extends React.Component {
 }
 
 class MessagesList extends React.Component {
+    componentDidUpdate() {
+        // Scroll to bottom of list
+        let listElement = React.findDOMNode(this.refs.list);
+        listElement.scrollTop = listElement.scrollHeight;
+    }
     render() {
-        let messageNodes = this.props.data.map(msg => {
+        let messageNodes = this.props.data.reverse().map(msg => {
             let author = `User ${msg.UserId}`;
             return (
                 <Message author={author}>{msg.text}</Message>
             );
         });
         return (
-            <div className="messages-list">
+            <div className="messages-list" ref="list">
                 {messageNodes}
             </div>
         );
@@ -68,7 +73,7 @@ export default class Messages extends React.Component {
     }
     render() {
         return (
-            <div className="messages">
+            <div className="messages-container">
                 <MessagesList data={this.state.data} />
                 <MessageForm onSubmit={this.handleMessageSubmit} />
             </div>

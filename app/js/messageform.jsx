@@ -5,9 +5,6 @@ export default class MessageForm extends React.Component {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    componentDidMount() {
-        // console.log(React.findDOMNode(this.refs.text));
-    }
     handleSubmit(e) {
         e.preventDefault();
 
@@ -24,11 +21,13 @@ export default class MessageForm extends React.Component {
     }
     render() {
         return (
-            <form className="message-form" onSubmit={this.handleSubmit}>
-                <input className="message-form__text" type="text" ref="text"
-                    autoFocus />
-                <input className="message-form__submit" type="submit" value="Send" />
-            </form>
+            <div className="message-form-container">
+                <form className="message-form" onSubmit={this.handleSubmit}>
+                    <input className="message-form__text" type="text" ref="text"
+                        autoFocus />
+                    <input className="message-form__submit" type="submit" value="Send" />
+                </form>
+            </div>
         );
     }
 }
