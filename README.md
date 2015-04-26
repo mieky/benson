@@ -49,6 +49,11 @@ http POST http://localhost:8080/api/adventure/1/message text="I sleep all night 
 - [ ] Travis CI build
 - [ ] use web sockets for polling
 
+
+## Acknowledgements
+
+- This project is a grateful recipient of the [Futurice Open Source sponsorship program](http://futurice.com/blog/sponsoring-free-time-open-source-activities).
+
 ## License
 
-MIT
+[MIT](https://github.com/staltz/cycle/blob/master/LICENSE)
