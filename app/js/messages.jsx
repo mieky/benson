@@ -4,7 +4,9 @@ class Message extends React.Component {
     render() {
         return (
             <div className="message">
-                {this.props.children.toString()}
+                <div className="message__author-image"></div>
+                <div className="message__author-name">{this.props.author}</div>
+                <div className="message__text">{this.props.children.toString()}</div>
             </div>
         );
     }
@@ -12,9 +14,10 @@ class Message extends React.Component {
 
 class MessagesList extends React.Component {
     render() {
-        var messageNodes = this.props.data.map(msg => {
+        let messageNodes = this.props.data.map(msg => {
+            let author = `User ${msg.UserId}`;
             return (
-                <Message>{msg.text}</Message>
+                <Message author={author}>{msg.text}</Message>
             );
         });
         return (
