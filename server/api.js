@@ -1,6 +1,6 @@
 "use strict";
 
-let service = require("./service");
+import service from "./service";
 
 function jsonOr404(req, res, next) {
     return function(data) {

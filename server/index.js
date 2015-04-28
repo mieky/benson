@@ -1,7 +1,7 @@
 "use strict";
 
-let restify = require("restify");
-let testdata = require("./testdata");
+import restify from "restify";
+import createTestData from "./testdata";
 
 let server = restify.createServer();
 server.use(restify.bodyParser());
@@ -11,7 +11,7 @@ server.get(/\/?.*/, restify.serveStatic({
     directory: "./app"
 }));
 
-testdata.createTestData()
+createTestData()
     .then(() => {
         server.listen(8080, () =>
             console.log("%s listening at %s", server.name, server.url)

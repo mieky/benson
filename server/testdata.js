@@ -1,12 +1,7 @@
 "use strict";
 
-let Promise = require("bluebird");
-let {
-    User,
-    Adventure,
-    Message,
-    UserAdventures
-} = require("./model");
+import Promise from "bluebird";
+import { User, Adventure, Message, UserAdventures } from "./model";
 
 function printOverview() {
     console.log("\n--- users");
@@ -38,7 +33,7 @@ function createAdventurer(options) {
         });
 }
 
-export function createTestData() {
+export default function createTestData() {
     // Initialize everything, deleting existing data
     return Promise.all([
         User.sync({ force: true }),
@@ -66,7 +61,7 @@ export function createTestData() {
             });
         })
         .tap(printOverview);
-};
+}
 
 if (!module.parent) {
     createTestData();

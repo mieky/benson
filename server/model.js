@@ -1,5 +1,5 @@
-const Sequelize = require("sequelize");
-const path = require("path");
+import Sequelize from "sequelize";
+import path from "path";
 
 let sequelize = new Sequelize(null, null, null, {
     dialect: "sqlite",

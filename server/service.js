@@ -1,12 +1,7 @@
 "use strict";
 
-let Promise = require("bluebird");
-let {
-    User,
-    Adventure,
-    Message,
-    UserAdventures
-} = require("./model");
+import Promise from "bluebird";
+import { User, Adventure, Message } from "./model";
 
 export function getAdventure(id) {
     return Adventure.find(id);
