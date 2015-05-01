@@ -3,6 +3,20 @@
 import Promise from "bluebird";
 import { User, Adventure, Message } from "./model";
 
+export function findOrCreateFacebookUser(data) {
+    let userProperties = {
+        firstName: data.name.givenName,
+        lastName: data.name.familyName,
+        email: data.emails[0].value
+    };
+    return User.findOrCreate({
+        where: userProperties
+    })
+    .then(users => {
+        return users[0];
+    });
+}
+
 export function getAdventure(id) {
     return Adventure.find(id);
 }

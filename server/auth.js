@@ -1,23 +1,14 @@
 import passport from "passport";
 import authConfig from "../auth-config.json";
 
+let service = require("./service");
 let FacebookStrategy = require("passport-facebook").Strategy;
-
-export function ensureAuthenticated(req, res, next) {
-    console.log("Checking if authenticated...");
-    if (req.isAuthenticated()) {
-        console.log("Authenticated, continuing");
-        return next();
-    }
-    console.log("Not authenticated, redirecting to auth");
-    res.redirect("/auth/facebook");
-}
 
 export function initialize(server) {
     // Serialize the user for the session
     passport.serializeUser(function(user, done) {
-        console.log("serializeUser", user);
-        done(null, user.id);
+        let serializedUser = user.get({ plain: true });
+        done(null, serializedUser);
     });
 
     // Deserialize the user from the session
@@ -29,9 +20,11 @@ export function initialize(server) {
 
     // Facebook will send back the token and profile
     function onAuth(token, refreshToken, profile, done) {
-        console.log("TODO: find or create user with Facebook ID", profile.id);
-        console.log(profile);
-        done(null, profile);
+        service.findOrCreateFacebookUser(profile)
+            .then(user => {
+                console.log("Connected as user", user.id);
+                done(null, user);
+            });
     }
 
     passport.use(new FacebookStrategy(authConfig, onAuth));
