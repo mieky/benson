@@ -1,17 +1,17 @@
 "use strict";
 
-import restify from "restify";
+import express from "express";
+import bodyParser from "body-parser";
+
 import createTestData from "./testdata";
 
-let server = restify.createServer();
-server.use(restify.bodyParser());
+let server = express();
 
-require("./auth").initialize(server);
+server.use(bodyParser.json());
+server.use("/app", express.static("app"));
+
+// require("./auth").initialize(server);
 require("./api").initialize(server);
-
-server.get(/\/?.*/, restify.serveStatic({
-    directory: "./app"
-}));
 
 createTestData()
     .then(() => {
