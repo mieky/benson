@@ -1,0 +1,5 @@
+{
+    "clientID": "[your Facebook client ID]",
+    "clientSecret": "[your Facebook client secret]",
+    "callbackURL": "http://localhost:8080/auth/facebook/callback"
+}

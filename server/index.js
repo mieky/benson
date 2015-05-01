@@ -5,6 +5,8 @@ import createTestData from "./testdata";
 
 let server = restify.createServer();
 server.use(restify.bodyParser());
+
+require("./auth").initialize(server);
 require("./api").initialize(server);
 
 server.get(/\/?.*/, restify.serveStatic({

@@ -1,6 +1,6 @@
 "use strict";
 
-import service from "./service";
+let service = require("./service");
 
 function jsonOr404(req, res, next) {
     return function(data) {
@@ -43,4 +43,10 @@ export function initialize(server) {
         service.getUsersAsync()
             .then(jsonOr404(req, res, next));
     });
-};
+
+    // For debugging only
+    server.post("/api/finduser", (req, res, next) => {
+        service.getUserWhere(req.body)
+            .then(jsonOr404(req, res, next));
+    });
+}

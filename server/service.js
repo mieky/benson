@@ -23,6 +23,12 @@ export function getUser(id) {
     return User.find(id);
 }
 
+export function getUserWhere(params) {
+    return User.find({
+        where: params
+    });
+}
+
 export function getUsersAsync() {
     return User.findAll();
 }
