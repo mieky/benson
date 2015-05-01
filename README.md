@@ -41,10 +41,11 @@ http POST http://localhost:8080/api/adventure/1/message text="I sleep all night 
 - [x] poll for new messages
 - [x] require user and adventure IDs for messages
 - [x] better styles for messages
-- [ ] use [PostCSS](https://github.com/postcss/postcss) for styles
+- [ ] add login page
 - [ ] authenticate via facebook, create new user
 - [ ] keep track of who's in an adventure (validate IDs)
 - [ ] use [JWT](http://jwt.io/)
+- [ ] use [PostCSS](https://github.com/postcss/postcss) for styles
 - [ ] fetch messages for a specific adventure ID
 - [ ] npm run scripts for eslint + jscs
 - [ ] Travis CI build
