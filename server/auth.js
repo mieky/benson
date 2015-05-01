@@ -3,21 +3,28 @@ import authConfig from "../auth-config.json";
 
 let FacebookStrategy = require("passport-facebook").Strategy;
 
-export function initialize(server) {
+export function ensureAuthenticated(req, res, next) {
+    console.log("Checking if authenticated...");
+    if (req.isAuthenticated()) {
+        console.log("Authenticated, continuing");
+        return next();
+    }
+    console.log("Not authenticated, redirecting to auth");
+    res.redirect("/auth/facebook");
+}
 
-    // used to serialize the user for the session
+export function initialize(server) {
+    // Serialize the user for the session
     passport.serializeUser(function(user, done) {
         console.log("serializeUser", user);
         done(null, user.id);
     });
 
-    // used to deserialize the user
+    // Deserialize the user from the session
     passport.deserializeUser(function(id, done) {
+        // TODO: do something like User.findById() here
         console.log("deserializeUser", id);
         done(null, id);
-        // User.findById(id, function(err, user) {
-        //     done(err, user);
-        // });
     });
 
     // Facebook will send back the token and profile
@@ -29,13 +36,14 @@ export function initialize(server) {
 
     passport.use(new FacebookStrategy(authConfig, onAuth));
 
-    server.get("/auth/facebook", passport.authenticate("facebook"));
+    server.get("/auth/facebook",
+        passport.authenticate("facebook", {
+            scope: "email"
+        }));
 
     server.get("/auth/facebook/callback",
-        passport.authenticate("facebook", { failureRedirect: "/login" }),
-        function(req, res) {
-            // Successful authentication, redirect home.
-            console.log("Facebook auth successful");
-            res.redirect("/");
-        });
+        passport.authenticate("facebook", {
+            successRedirect: "/index.html",
+            failureRedirect: "/fail.html"
+        }));
 }

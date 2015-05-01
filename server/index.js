@@ -2,20 +2,24 @@
 
 import express from "express";
 import bodyParser from "body-parser";
-
+import passport from "passport";
 import createTestData from "./testdata";
 
-let server = express();
+let auth = require("./auth");
+let app = express();
 
-server.use(bodyParser.json());
-server.use("/app", express.static("app"));
+app.use(bodyParser.json());
+app.use(passport.initialize());
+app.use(passport.session());
 
-// require("./auth").initialize(server);
-require("./api").initialize(server);
+auth.initialize(app);
+
+require("./routes").initialize(app);
+app.use("/", express.static("app"));
 
 createTestData()
     .then(() => {
-        server.listen(8080, () =>
-            console.log("%s listening at %s", server.name, server.url)
-        );
+        app.listen(8080, () => {
+            console.log("%s listening at %s", app.name, app.url);
+        });
     });
