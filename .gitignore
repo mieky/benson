@@ -6,3 +6,4 @@ app/jspm_packages
 app/config.js
 database.sqlite
 npm-debug.log
+auth-config.json
