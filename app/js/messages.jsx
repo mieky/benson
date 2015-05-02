@@ -39,6 +39,8 @@ class MessagesList extends React.Component {
 export default class Messages extends React.Component {
     constructor(props) {
         super(props);
+
+        this.DEFAULT_POLL_INTERVAL = 10000;
         this.state = {
             data: []
         };
@@ -47,7 +49,8 @@ export default class Messages extends React.Component {
     }
     componentDidMount() {
         this.loadMessages();
-        setInterval(this.loadMessages, this.props.pollInterval);
+        setInterval(this.loadMessages,
+            this.props.pollInterval || this.DEFAULT_POLL_INTERVAL);
     }
     loadMessages() {
         fetch("/api/adventure/1/messages")
