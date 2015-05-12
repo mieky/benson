@@ -17,6 +17,10 @@ export function findOrCreateFacebookUser(data) {
     });
 }
 
+export function getUserToken() {
+
+}
+
 export function getAdventure(id) {
     return Adventure.find(id);
 }

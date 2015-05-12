@@ -21,6 +21,10 @@ let Message = sequelize.define("Message", {
     text: { type: Sequelize.STRING }
 });
 
+let Token = sequelize.define("Token", {
+    text: { type: Sequelize.STRING }
+});
+
 let UserAdventures = sequelize.define("UserAdventures", {});
 
 User.belongsToMany(Adventure, { through: "UserAdventures" });
@@ -32,9 +36,13 @@ Adventure.hasMany(Message);
 Message.belongsTo(User);
 Message.belongsTo(Adventure);
 
+User.hasMany(Token);
+Token.belongsTo(User);
+
 module.exports = {
     User,
     Adventure,
     Message,
-    UserAdventures
+    UserAdventures,
+    Token
 };

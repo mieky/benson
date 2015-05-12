@@ -19,14 +19,29 @@ h1, h2 {
     margin: 10px 0 15px 0;
 }
 
+a, a:link, a:active {
+    color: #84a435;
+}
+
 .site-header {
+    display: flex;
+    align-items: center;
+
     background-color: #b4d455;
     color: white;
     padding: 5px 20px;
 }
 
+    .site-header__title {
+        flex: 1;
+    }
+
     .site-header__tagline {
         margin-bottom: 10px;
+    }
+
+    .site-header__status {
+        color: white;
     }
 
 .main {
@@ -37,6 +52,10 @@ h1, h2 {
 
     color: #666;
     padding-bottom: 20px;
+}
+
+.home {
+    padding: 20px;
 }
 
 .messages-container {
@@ -81,7 +100,7 @@ h1, h2 {
     flex-direction: row;
 
     padding: 0px 15px;
-    margin-bottom: 10px;
+    margin-bottom: 80px;
 }
 
 .message-form__text {

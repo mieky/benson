@@ -24,6 +24,10 @@ export function initialize(server) {
             .then(user => {
                 console.log("Connected as user", user.id);
                 done(null, user);
+            })
+            .catch(err => {
+                console.log("Couldn't find or create user", err);
+                done(err);
             });
     }
 
@@ -35,8 +39,10 @@ export function initialize(server) {
         }));
 
     server.get("/auth/facebook/callback",
-        passport.authenticate("facebook", {
-            successRedirect: "/index.html",
-            failureRedirect: "/fail.html"
-        }));
+        passport.authenticate("facebook", { failureRedirect: "/login" }),
+        (req, res) => {
+            // Successful authentication:
+            console.log("TODO: create custom auth token for client");
+            res.redirect("/#/token?token=keyboard_cat");
+        });
 }
