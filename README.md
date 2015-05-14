@@ -41,8 +41,10 @@ http POST http://localhost:8080/api/adventure/1/message text="I sleep all night 
 - [x] better styles for messages
 - [x] create new user via facebook
 - [x] add login page
-- [ ] authenticate user token in requests
+- [x] authenticate user token when receiving messages
+- [ ] authenticate user token when posting
 - [ ] keep track of who's in an adventure (validate IDs)
+- [ ] show message author's name
 - [ ] use [JWT](http://jwt.io/)
 - [ ] use [PostCSS](https://github.com/postcss/postcss) for styles
 - [ ] fetch messages for a specific adventure ID

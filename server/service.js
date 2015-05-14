@@ -7,7 +7,6 @@ import { User, Adventure, Message, Token } from "./database";
 class TokenError extends Error {}
 
 export function isTokenValidAsync(token) {
-    console.log(`token valid check for ${token}`);
     let decoded = null;
     try {
         decoded = bs58.decode(token);
@@ -18,20 +17,18 @@ export function isTokenValidAsync(token) {
     let tokenContents = new Buffer(decoded).toString();
     let [userId, email, issueDate] = tokenContents.split(";");
 
-    console.log("Token contents", tokenContents);
-    console.log(userId, email, issueDate);
-
-    console.log(`Searching for token ${token} for userId ${userId}`);
-
-    return Token.findAll()
-        .then(token => {
-            console.log("found token for user?", token);
-            if (!token) {
-                throw new TokenError("Invalid token");
-            }
-            return token;
-        });
-
+    return Token.find({
+        where: {
+            UserId: userId,
+            text: token
+        }
+    })
+    .then(token => {
+        if (!token) {
+            throw new TokenError("Invalid token");
+        }
+        return token;
+    });
 }
 
 export function findOrCreateFacebookUser(data) {
@@ -40,6 +37,7 @@ export function findOrCreateFacebookUser(data) {
         lastName: data.name.familyName,
         email: data.emails[0].value
     };
+
     return User.findOrCreate({
         where: userProperties
     })
@@ -63,8 +61,9 @@ export function findOrCreateToken(user) {
         let token = bs58.encode(new Buffer(tokenContents.join(";")));
 
         console.log(`Creating token for user ${user.id}: ${token}`);
-        return user.addToken({
-            text: token
+        return Token.create({
+            text: token,
+            UserId: user.id
         });
     });
 }
@@ -75,15 +74,17 @@ export function getAdventure(id) {
 
 export function getMessages(adventureId, token) {
     return isTokenValidAsync(token)
-        .then(Message.findAll({
-            where: {
-                AdventureId: adventureId
-            },
-            order: [
-                ["createdAt", "DESC"],
-                ["id", "DESC"]
-            ]
-        }));
+        .then(token => {
+            return Message.findAll({
+                where: {
+                    AdventureId: adventureId
+                },
+                order: [
+                    ["createdAt", "DESC"],
+                    ["id", "DESC"]
+                ]
+            })
+        });
 }
 
 export function getUser(id) {
@@ -98,6 +99,10 @@ export function getUserWhere(params) {
 
 export function getUsersAsync() {
     return User.findAll();
+}
+
+export function getTokens() {
+    return Token.findAll();
 }
 
 export function postMessage(adventureId, message) {

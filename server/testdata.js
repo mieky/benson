@@ -1,6 +1,7 @@
 "use strict";
 
 import Promise from "bluebird";
+import bs58 from "bs58";
 import database from "./database";
 let { User, Adventure, Message, Token, UserAdventures } = database;
 
@@ -21,6 +22,17 @@ function createAdventurer(options) {
     })
         .then(user => {
             return user.addAdventure(options.adventure);
+        })
+        .then(userAdventure => {
+            let tokenText = bs58.encode(new Buffer(`${userAdventure.UserId};;`));
+            return Token.create({
+                text: tokenText,
+                UserId: userAdventure.UserId
+            })
+            .then(token => {
+                console.log("Created token", token.get({ plain: true }));
+                return userAdventure;
+            })
         })
         .then(userAdventure => {
             return Message.create({

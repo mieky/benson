@@ -43,7 +43,7 @@ export function initialize(server) {
         (req, res) => {
             // Successful authentication: give token
             service.findOrCreateToken(req.user).then(token => {
-                res.redirect(`/#/token?token=${token.id.text}`);
+                res.redirect(`/#/token?token=${token.get("text")}`);
             });
         });
 }

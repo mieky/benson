@@ -16,7 +16,7 @@ function jsonOr404(req, res, next) {
 export function initialize(server) {
     // Get messages for adventure
     server.get("/api/adventure/:id/messages", (req, res, next) => {
-        service.getMessages(req.params.id, req.params.token)
+        service.getMessages(req.params.id, req.query.token)
             .then(jsonOr404(req, res, next));
     });
 
@@ -58,7 +58,6 @@ export function initialize(server) {
     });
 
     server.get("/api/checktoken", (req, res, next) => {
-        console.log("req params", req.query);
         service.isTokenValidAsync(req.query.token)
             .then(jsonOr404(req, res, next))
             .catch(err => {
@@ -66,4 +65,10 @@ export function initialize(server) {
                 res.status(401).json(err);
             });
     });
+
+    server.get("/api/tokens", (req, res, next) => {
+        service.getTokens()
+            .then(jsonOr404(req, res, next));
+
+    })
 }

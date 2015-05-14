@@ -55,7 +55,8 @@ export default class Messages extends React.Component {
     }
 
     loadMessages() {
-        fetch("/api/adventure/1/messages")
+        let token = this.props.auth.getToken();
+        fetch(`/api/adventure/1/messages?token=${token}`)
             .then(res => res.json())
             .then(json => {
                 this.setState({
@@ -79,7 +80,7 @@ export default class Messages extends React.Component {
                 });
             });
     }
-    
+
     render() {
         return (
             <div className="messages-container">

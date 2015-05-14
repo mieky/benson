@@ -88,6 +88,10 @@ var requireAuth = (Component) => {
                 transition.redirect("/");
             }
         }
+        constructor(props) {
+            super(props);
+            this.props.auth = auth;
+        }
         render() {
             return <Component {...this.props} />;
         }
@@ -99,7 +103,7 @@ let routes = (
         <Route handler={Home} />
         <Route name="token" handler={Token} />
         <Route name="logout" handler={Logout} />
-        <Route name="messages" handler={requireAuth(Messages)} auth={auth} />
+        <Route name="messages" handler={requireAuth(Messages)} />
         <DefaultRoute handler={requireAuth(Messages)} />
     </Route>
 );
