@@ -1,7 +1,8 @@
 "use strict";
 
+import bs58 from "bs58";
 import Promise from "bluebird";
-import { User, Adventure, Message } from "./model";
+import { User, Adventure, Message, Token } from "./model";
 
 export function findOrCreateFacebookUser(data) {
     let userProperties = {
@@ -17,8 +18,22 @@ export function findOrCreateFacebookUser(data) {
     });
 }
 
-export function getUserToken() {
+export function findOrCreateToken(user) {
+    return Token.findAll({
+        where: {
+            UserId: user.id
+        }
+    })
+    .then(tokens => {
+        if (tokens.length > 0) {
+            return tokens[0];
+        }
 
+        let token = bs58.encode(new Buffer(user.email + new Date().getTime()));
+        return user.addToken({
+            text: token
+        });
+    });
 }
 
 export function getAdventure(id) {

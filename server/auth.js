@@ -41,8 +41,9 @@ export function initialize(server) {
     server.get("/auth/facebook/callback",
         passport.authenticate("facebook", { failureRedirect: "/login" }),
         (req, res) => {
-            // Successful authentication:
-            console.log("TODO: create custom auth token for client");
-            res.redirect("/#/token?token=keyboard_cat");
+            // Successful authentication: give token
+            service.findOrCreateToken(req.user).then(token => {
+                res.redirect(`/#/token?token=${token.id.text}`);
+            });
         });
 }

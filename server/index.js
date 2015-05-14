@@ -19,7 +19,8 @@ app.use("/", express.static("app"));
 
 createTestData()
     .then(() => {
-        app.listen(8080, () => {
-            console.log("%s listening at %s", app.name, app.url);
+        let server = app.listen(8080, () => {
+            let { address, port } = server.address();
+            console.log("Server listening at http://%s:%s", address, port);
         });
     });

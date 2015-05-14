@@ -1,7 +1,7 @@
 "use strict";
 
 import Promise from "bluebird";
-import { User, Adventure, Message, UserAdventures } from "./model";
+import { User, Adventure, Message, Token, UserAdventures } from "./model";
 
 function printOverview() {
     console.log("\n--- users");
@@ -39,6 +39,7 @@ export default function createTestData() {
         User.sync({ force: true }),
         Adventure.sync({ force: true }),
         Message.sync({ force: true }),
+        Token.sync({ force: true }),
         UserAdventures.sync({ force: true })
     ])
         .then(() => {
