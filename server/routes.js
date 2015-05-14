@@ -5,7 +5,7 @@ let service = require("./service");
 function jsonOr404(req, res, next) {
     return function(data) {
         if (!data) {
-            res.send(404);
+            res.status(404);
         } else {
             res.json(data);
         }
@@ -14,39 +14,56 @@ function jsonOr404(req, res, next) {
 }
 
 export function initialize(server) {
-    server.get("/api/adventure/:id", (req, res, next) => {
-        service.getAdventure(req.params.id)
-            .then(jsonOr404(req, res, next));
-    });
-
+    // Get messages for adventure
     server.get("/api/adventure/:id/messages", (req, res, next) => {
-        service.getMessages(req.params.id)
+        service.getMessages(req.params.id, req.params.token)
             .then(jsonOr404(req, res, next));
     });
 
+    // Post a message to Adventure
     server.post("/api/adventure/:id/message", (req, res, next) => {
         service.postMessage(req.params.id, req.body)
             .then(jsonOr404(req, res, next))
             .catch(err => {
                 console.log(err.name);
                 console.log("Error posting message", err);
-                res.json(400, err);
+                res.status(400).json(err);
             });
     });
 
+    // Get adventure
+    server.get("/api/adventure/:id", (req, res, next) => {
+        service.getAdventure(req.params.id)
+            .then(jsonOr404(req, res, next));
+    });
+
+    // Get user info
     server.get("/api/user/:id", (req, res, next) => {
         service.getUser(req.params.id)
             .then(jsonOr404(req, res, next));
     });
 
+    // List users
     server.get("/api/user", (req, res, next) => {
         service.getUsersAsync()
             .then(jsonOr404(req, res, next));
     });
 
-    // For debugging only
+    /**
+     *  DEBUGGING BITS
+     */
     server.post("/api/finduser", (req, res, next) => {
         service.getUserWhere(req.body)
             .then(jsonOr404(req, res, next));
+    });
+
+    server.get("/api/checktoken", (req, res, next) => {
+        console.log("req params", req.query);
+        service.isTokenValidAsync(req.query.token)
+            .then(jsonOr404(req, res, next))
+            .catch(err => {
+                console.log(err.name);
+                res.status(401).json(err);
+            });
     });
 }

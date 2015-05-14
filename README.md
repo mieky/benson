@@ -21,8 +21,6 @@ node_modules/.bin/jspm install
 npm start
 ```
 
-**Caution!** `npm start` will destroy your database.sqlite to get a clean slate every time.
-
 Then you can browse to http://localhost:8080/, and:
 
 ```
@@ -42,8 +40,8 @@ http POST http://localhost:8080/api/adventure/1/message text="I sleep all night 
 - [x] require user and adventure IDs for messages
 - [x] better styles for messages
 - [x] create new user via facebook
-- [ ] add login page
-- [ ] authenticate user in requests
+- [x] add login page
+- [ ] authenticate user token in requests
 - [ ] keep track of who's in an adventure (validate IDs)
 - [ ] use [JWT](http://jwt.io/)
 - [ ] use [PostCSS](https://github.com/postcss/postcss) for styles

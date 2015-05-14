@@ -39,10 +39,15 @@ Message.belongsTo(Adventure);
 User.hasMany(Token);
 Token.belongsTo(User);
 
+function initialize() {
+    return sequelize.sync();
+}
+
 module.exports = {
     User,
     Adventure,
     Message,
     UserAdventures,
-    Token
+    Token,
+    initialize
 };

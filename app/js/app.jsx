@@ -99,7 +99,7 @@ let routes = (
         <Route handler={Home} />
         <Route name="token" handler={Token} />
         <Route name="logout" handler={Logout} />
-        <Route name="messages" handler={requireAuth(Messages)} />
+        <Route name="messages" handler={requireAuth(Messages)} auth={auth} />
         <DefaultRoute handler={requireAuth(Messages)} />
     </Route>
 );

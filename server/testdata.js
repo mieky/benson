@@ -1,7 +1,8 @@
 "use strict";
 
 import Promise from "bluebird";
-import { User, Adventure, Message, Token, UserAdventures } from "./model";
+import database from "./database";
+let { User, Adventure, Message, Token, UserAdventures } = database;
 
 function printOverview() {
     console.log("\n--- users");
@@ -33,8 +34,7 @@ function createAdventurer(options) {
         });
 }
 
-export default function createTestData() {
-    // Initialize everything, deleting existing data
+function createTestDataAsync() {
     return Promise.all([
         User.sync({ force: true }),
         Adventure.sync({ force: true }),
@@ -43,7 +43,7 @@ export default function createTestData() {
         UserAdventures.sync({ force: true })
     ])
         .then(() => {
-            return Adventure.create({ name: "A grand voyage" });
+            return Adventure.create({ name: "A grand voyage" })
         })
         .then(adventure => {
             return createAdventurer({
@@ -62,6 +62,21 @@ export default function createTestData() {
             });
         })
         .tap(printOverview);
+}
+
+export default function createTestDataIfEmpty() {
+    return database.initialize()
+        .then(db => {
+            return User.count();
+        })
+        .then(count => {
+            if (count > 0) {
+                console.log("Something found in the database, all right!");
+                return Promise.resolve();
+            }
+            console.log("Database looks empty, creating some test data...");
+            return createTestDataAsync();
+        });
 }
 
 if (!module.parent) {

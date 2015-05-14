@@ -47,11 +47,13 @@ export default class Messages extends React.Component {
         this.loadMessages = this.loadMessages.bind(this);
         this.handleMessageSubmit = this.handleMessageSubmit.bind(this);
     }
+
     componentDidMount() {
         this.loadMessages();
         setInterval(this.loadMessages,
             this.props.pollInterval || this.DEFAULT_POLL_INTERVAL);
     }
+
     loadMessages() {
         fetch("/api/adventure/1/messages")
             .then(res => res.json())
@@ -61,6 +63,7 @@ export default class Messages extends React.Component {
                 });
             });
     }
+
     handleMessageSubmit(msg) {
         fetch("/api/adventure/1/message", {
             headers: {
@@ -76,6 +79,7 @@ export default class Messages extends React.Component {
                 });
             });
     }
+    
     render() {
         return (
             <div className="messages-container">
