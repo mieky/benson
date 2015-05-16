@@ -33,6 +33,12 @@ var auth = {
 };
 
 class Home extends React.Component {
+    static willTransitionTo(transition) {
+        if (auth.loggedIn()) {
+            transition.redirect("/messages");
+        }
+    }
+
     render() {
         return (
             <div className="home">

@@ -72,13 +72,16 @@ export function getAdventure(id) {
     return Adventure.find(id);
 }
 
-export function getMessages(adventureId, token) {
+export function getMessages(token, adventureId) {
     return isTokenValidAsync(token)
         .then(token => {
             return Message.findAll({
                 where: {
                     AdventureId: adventureId
                 },
+                include: [
+                    { model: User, attributes: ["firstName", "lastName"] }
+                ],
                 order: [
                     ["createdAt", "DESC"],
                     ["id", "DESC"]
@@ -105,22 +108,26 @@ export function getTokens() {
     return Token.findAll();
 }
 
-export function postMessage(adventureId, message) {
-    if (!message.text) {
-        return Promise.reject(new Error("Missing message text"));
-    } else if (!message.userId) {
-        return Promise.reject(new Error("Missing user ID"));
-    }
+export function postMessage(token, adventureId, message) {
+    return isTokenValidAsync(token)
+        .then(token => {
+            if (!message.text) {
+                return Promise.reject(new Error("Missing message text"));
+            } else if (!token.UserId) {
+                return Promise.reject(new Error("Missing user ID"));
+            }
 
-    return Message.create({
-        text: message.text,
-        UserId: message.userId,
-        AdventureId: adventureId
-    })
-    .catch(err => {
-        if (err.name === "SequelizeForeignKeyConstraintError") {
-            return Promise.reject(new Error("Invalid user or adventure ID"));
-        }
-        return err;
-    });
+            // Post with the userId from the token
+            return Message.create({
+                text: message.text,
+                UserId: token.UserId,
+                AdventureId: adventureId
+            })
+        })
+        .catch(err => {
+            if (err.name === "SequelizeForeignKeyConstraintError") {
+                return Promise.reject(new Error("Invalid user or adventure ID"));
+            }
+            return err;
+        });
 }

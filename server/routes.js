@@ -16,13 +16,13 @@ function jsonOr404(req, res, next) {
 export function initialize(server) {
     // Get messages for adventure
     server.get("/api/adventure/:id/messages", (req, res, next) => {
-        service.getMessages(req.params.id, req.query.token)
+        service.getMessages(req.query.token, req.params.id)
             .then(jsonOr404(req, res, next));
     });
 
     // Post a message to Adventure
     server.post("/api/adventure/:id/message", (req, res, next) => {
-        service.postMessage(req.params.id, req.body)
+        service.postMessage(req.query.token, req.params.id, req.body)
             .then(jsonOr404(req, res, next))
             .catch(err => {
                 console.log(err.name);

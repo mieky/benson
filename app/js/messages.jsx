@@ -23,7 +23,7 @@ class MessagesList extends React.Component {
     }
     render() {
         let messageNodes = this.props.data.reverse().map(msg => {
-            let author = `User ${msg.UserId}`;
+            let author = `${msg.User.firstName} ${msg.User.lastName[0]}.`;
             return (
                 <Message author={author}>{msg.text}</Message>
             );
@@ -66,7 +66,8 @@ export default class Messages extends React.Component {
     }
 
     handleMessageSubmit(msg) {
-        fetch("/api/adventure/1/message", {
+        let token = this.props.auth.getToken();
+        fetch(`/api/adventure/1/message?token=${token}`, {
             headers: {
                 "Content-Type": "application/json"
             },

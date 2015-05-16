@@ -13,10 +13,7 @@ export default class MessageForm extends React.Component {
             return;
         }
 
-        this.props.onSubmit({
-            userId: 1,
-            text: text
-        });
+        this.props.onSubmit({ text: text });
         React.findDOMNode(this.refs.text).value = "";
     }
     render() {
