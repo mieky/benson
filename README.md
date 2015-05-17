@@ -33,7 +33,6 @@ Then you can browse to http://localhost:8080/, authenticate with Facebook and st
 - [x] add login page
 - [x] authenticate user token when receiving messages
 - [x] authenticate user token when posting
-- [ ] stop retrieving messages on logout
 - [ ] keep track of who's in an adventure (validate IDs)
 - [ ] show message author's name
 - [ ] use [JWT](http://jwt.io/)

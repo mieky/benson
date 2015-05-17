@@ -54,8 +54,12 @@ export default class Messages extends React.Component {
 
     componentDidMount() {
         this.loadMessages();
-        setInterval(this.loadMessages,
+        this.messageInterval = setInterval(this.loadMessages,
             this.props.pollInterval || this.DEFAULT_POLL_INTERVAL);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.messageInterval);
     }
 
     loadMessages() {
