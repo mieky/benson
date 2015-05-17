@@ -23,7 +23,11 @@ class MessagesList extends React.Component {
     }
     render() {
         let messageNodes = this.props.data.reverse().map(msg => {
-            let author = `${msg.User.firstName} ${msg.User.lastName[0]}.`;
+            // TODO: preserve and prefill author info locally
+            let author = "";
+            if (msg.User) {
+                author = `${msg.User.firstName} ${msg.User.lastName[0]}.`;
+            }
             return (
                 <Message author={author}>{msg.text}</Message>
             );
