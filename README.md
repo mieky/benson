@@ -21,17 +21,7 @@ node_modules/.bin/jspm install
 npm start
 ```
 
-Then you can browse to http://localhost:8080/, and:
-
-```
-curl -is http://localhost:8080/api/adventure/1/messages -H 'accept: application/json'
-```
-
-Posting a message with [httpie](https://github.com/jakubroztocil/httpie):
-
-```
-http POST http://localhost:8080/api/adventure/1/message text="I sleep all night and work all day" userId=2
-```
+Then you can browse to http://localhost:8080/, authenticate with Facebook and start messaging,
 
 ## Todo
 
@@ -42,7 +32,8 @@ http POST http://localhost:8080/api/adventure/1/message text="I sleep all night 
 - [x] create new user via facebook
 - [x] add login page
 - [x] authenticate user token when receiving messages
-- [ ] authenticate user token when posting
+- [x] authenticate user token when posting
+- [ ] stop retrieving messages on logout
 - [ ] keep track of who's in an adventure (validate IDs)
 - [ ] show message author's name
 - [ ] use [JWT](http://jwt.io/)
