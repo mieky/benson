@@ -18,7 +18,8 @@ function printOverview() {
 function createAdventurer(options) {
     return User.create({
         firstName: options.firstName,
-        lastName: options.lastName
+        lastName: options.lastName,
+        imageUrl: `https://graph.facebook.com/v2.3/${options.facebookId}/picture?type=square`
     })
         .then(user => {
             return user.addAdventure(options.adventure);
@@ -62,6 +63,7 @@ function createTestDataAsync() {
                 firstName: "Frank",
                 lastName: "Ballston",
                 adventure: adventure,
+                facebookId: 4,
                 firstMessage: "Hi, I'm Frank!"
             });
         })
@@ -70,6 +72,7 @@ function createTestDataAsync() {
                 firstName: "Adam",
                 lastName: "Goggles",
                 adventure: adventure,
+                facebookId: 5,
                 firstMessage: "Hello everybody."
             });
         })
