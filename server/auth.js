@@ -22,7 +22,6 @@ export function initialize(server) {
     function onAuth(token, refreshToken, profile, done) {
         service.findOrCreateFacebookUser(profile)
             .then(user => {
-                console.log("Connected as user", user.id);
                 done(null, user);
             })
             .catch(err => {

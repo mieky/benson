@@ -3,11 +3,14 @@ import MessageForm from "./messageform.jsx!";
 
 class Message extends React.Component {
     render() {
+        let imageStyle = {
+            "background-image": `url(${this.props.author.imageUrl})`
+        };
         return (
             <div className="message">
-                <div className="message__author-image"></div>
+                <div className="message__author-image" style={imageStyle}></div>
                 <div className="message__content">
-                    <div className="message__author-name">{this.props.author}</div>
+                    <div className="message__author-name">{this.props.author.name}</div>
                     <div className="message__text">{this.props.children.toString()}</div>
                 </div>
             </div>
@@ -24,9 +27,13 @@ class MessagesList extends React.Component {
     render() {
         let messageNodes = this.props.data.reverse().map(msg => {
             // TODO: preserve and prefill author info locally
-            let author = "";
+            let author = {
+                name: "",
+                imageUrl: "",
+            };
             if (msg.User) {
-                author = `${msg.User.firstName} ${msg.User.lastName[0]}.`;
+                author.name = `${msg.User.firstName} ${msg.User.lastName[0]}.`;
+                author.imageUrl = msg.User.imageUrl;
             }
             return (
                 <Message author={author}>{msg.text}</Message>

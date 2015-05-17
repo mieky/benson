@@ -6,6 +6,16 @@ import { User, Adventure, Message, Token } from "./database";
 
 class TokenError extends Error {}
 
+/*
+    "https://www.facebook.com/app_scoped_user_id/10152821918247405/"
+    ->
+    "https://graph.facebook.com/v2.3/10152821918247405/picture?type=square"
+*/
+function getImageUrl(profileUrl) {
+    let userId = profileUrl.split("/").filter(l => l.match(/^[0-9]+$/))[0];
+    return `https://graph.facebook.com/v2.3/${userId}/picture?type=square`;
+}
+
 export function isTokenValidAsync(token) {
     let decoded = null;
     try {
@@ -35,8 +45,10 @@ export function findOrCreateFacebookUser(data) {
     let userProperties = {
         firstName: data.name.givenName,
         lastName: data.name.familyName,
-        email: data.emails[0].value
+        email: data.emails[0].value,
+        imageUrl: getImageUrl(data.profileUrl)
     };
+    console.log("user properties", userProperties);
 
     return User.findOrCreate({
         where: userProperties
@@ -80,7 +92,10 @@ export function getMessages(token, adventureId) {
                     AdventureId: adventureId
                 },
                 include: [
-                    { model: User, attributes: ["firstName", "lastName"] }
+                    {
+                        model: User,
+                        attributes: ["firstName", "lastName", "imageUrl"]
+                    }
                 ],
                 order: [
                     ["createdAt", "DESC"],
