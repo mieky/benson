@@ -34,8 +34,11 @@ Then you can browse to http://localhost:8080/, authenticate with Facebook and st
 - [x] authenticate user token when receiving messages
 - [x] authenticate user token when posting
 - [x] display user facebook profile picture
+- [x] show message author's name
+- [x] mobile-friendly UI
+- [ ] cache user details locally to populate messages on posting
+- [ ] lazy loading of older messages
 - [ ] keep track of who's in an adventure (validate IDs)
-- [ ] show message author's name
 - [ ] use [JWT](http://jwt.io/)
 - [ ] use [PostCSS](https://github.com/postcss/postcss) for styles
 - [ ] fetch messages for a specific adventure ID

@@ -65,7 +65,7 @@ a, a:link, a:active {
 }
 
 .messages-list {
-    padding: 15px 20px;
+    padding: 10px;
     overflow-y: scroll;
 }
 
@@ -95,12 +95,16 @@ a, a:link, a:active {
     padding-top: 8px;
 }
 
+.message-form-container {
+    padding: 0 0 10px 0;
+}
+
 .message-form {
     display: flex;
     flex-direction: row;
 
-    padding: 0px 15px;
-    margin-bottom: 80px;
+    padding: 0px 10px;
+    margin-bottom: 5px;
 }
 
 .message-form__text {
