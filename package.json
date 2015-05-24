@@ -16,7 +16,7 @@
   "devDependencies": {
     "babel": "^5.1.11",
     "bluebird": "^2.9.24",
-    "eslint": "^0.20.0",
+    "eslint": "^0.21.2",
     "eslint-plugin-react": "^2.2.0",
     "jscs": "^1.12.0",
     "jspm": "^0.15.4"

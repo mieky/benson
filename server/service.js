@@ -33,11 +33,11 @@ export function isTokenValidAsync(token) {
             text: token
         }
     })
-    .then(token => {
-        if (!token) {
+    .then(userToken => {
+        if (!userToken) {
             throw new TokenError("Invalid token");
         }
-        return token;
+        return userToken;
     });
 }
 
@@ -84,8 +84,8 @@ export function getAdventure(id) {
     return Adventure.find(id);
 }
 
-export function getMessages(token, adventureId) {
-    return isTokenValidAsync(token)
+export function getMessages(requestToken, adventureId) {
+    return isTokenValidAsync(requestToken)
         .then(token => {
             return Message.findAll({
                 where: {
@@ -101,7 +101,7 @@ export function getMessages(token, adventureId) {
                     ["createdAt", "DESC"],
                     ["id", "DESC"]
                 ]
-            })
+            });
         });
 }
 
@@ -123,8 +123,8 @@ export function getTokens() {
     return Token.findAll();
 }
 
-export function postMessage(token, adventureId, message) {
-    return isTokenValidAsync(token)
+export function postMessage(requestToken, adventureId, message) {
+    return isTokenValidAsync(requestToken)
         .then(token => {
             if (!message.text) {
                 return Promise.reject(new Error("Missing message text"));
@@ -137,7 +137,7 @@ export function postMessage(token, adventureId, message) {
                 text: message.text,
                 UserId: token.UserId,
                 AdventureId: adventureId
-            })
+            });
         })
         .catch(err => {
             if (err.name === "SequelizeForeignKeyConstraintError") {
