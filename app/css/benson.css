@@ -74,6 +74,10 @@ a, a:link, a:active {
     margin-bottom: 15px;
 }
 
+.message:last-child {
+    margin-bottom: 10px;
+}
+
 .message__content {
     flex: 1;
 }
