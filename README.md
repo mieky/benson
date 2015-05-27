@@ -30,7 +30,7 @@ Then you can browse to http://localhost:8080/, authenticate with Facebook and st
 Miscellanous thoughts, tech and feature wise. May or may not happen!
 
 - [ ] post images/smiles
-- [ ] maybe introduce Flux/alt?
+- [ ] maybe introduce [Flux](facebook.github.io/flux/)/[alt](https://github.com/goatslacker/alt)?
 - [ ] cache user details locally to populate messages on posting
 - [ ] lazy loading/pagination of older messages
 - [ ] keep track of who's in an adventure (validate IDs)
