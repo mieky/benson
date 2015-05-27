@@ -1,7 +1,9 @@
 benson
 ======
 
-Benson lets you share your adventures. It's like a chatroom, but with a specific focus, start, and end.
+Benson lets you share your adventures. It's like a chatroom, but with specific focus, start, and end.
+
+![Screenshot](https://github.com/mieky/benson/raw/master/screenshot.png)
 
 ## Features
 
@@ -25,27 +27,18 @@ Then you can browse to http://localhost:8080/, authenticate with Facebook and st
 
 ## Todo
 
-- [x] post message
-- [x] poll for new messages
-- [x] require user and adventure IDs for messages
-- [x] better styles for messages
-- [x] create new user via facebook
-- [x] add login page
-- [x] authenticate user token when receiving messages
-- [x] authenticate user token when posting
-- [x] display user facebook profile picture
-- [x] show message author's name
-- [x] mobile-friendly UI
+Miscellanous thoughts, tech and feature wise. May or may not happen!
+
+- [ ] post images/smiles
+- [ ] maybe introduce Flux/alt?
 - [ ] cache user details locally to populate messages on posting
-- [ ] lazy loading of older messages
+- [ ] lazy loading/pagination of older messages
 - [ ] keep track of who's in an adventure (validate IDs)
-- [ ] use [JWT](http://jwt.io/)
 - [ ] use [PostCSS](https://github.com/postcss/postcss) for styles
-- [ ] fetch messages for a specific adventure ID
+- [ ] join adventures by slug
 - [ ] npm run scripts for eslint + jscs
 - [ ] Travis CI build
 - [ ] use web sockets for polling
-
 
 ## Acknowledgements
 
