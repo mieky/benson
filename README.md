@@ -7,7 +7,7 @@ Benson lets you share your adventures. It's like a chatroom, but with specific f
 
 ## Features
 
-Post messages as "User 1" in a simple web UI.
+Login with Facebook and post messages in a simple web UI.
 
 ## Tech
 
