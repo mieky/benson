@@ -56,7 +56,7 @@ function createTestDataAsync() {
         UserAdventures.sync({ force: true })
     ])
         .then(() => {
-            return Adventure.create({ name: "A grand voyage" })
+            return Adventure.create({ name: "A grand voyage" });
         })
         .then(adventure => {
             return createAdventurer({
