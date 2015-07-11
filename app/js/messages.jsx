@@ -29,7 +29,7 @@ class MessagesList extends React.Component {
             // TODO: preserve and prefill author info locally
             let author = {
                 name: "",
-                imageUrl: "",
+                imageUrl: ""
             };
             if (msg.User) {
                 author.name = `${msg.User.firstName} ${msg.User.lastName[0]}.`;

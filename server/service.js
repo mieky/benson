@@ -25,7 +25,7 @@ export function isTokenValidAsync(token) {
         return Promise.reject(e);
     }
     let tokenContents = new Buffer(decoded).toString();
-    let [userId, email, issueDate] = tokenContents.split(";");
+    let [userId, email, issueDate] = tokenContents.split(";"); /* eslint no-unused-vars: 0 */
 
     return Token.find({
         where: {

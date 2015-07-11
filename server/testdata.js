@@ -33,7 +33,7 @@ function createAdventurer(options) {
             .then(token => {
                 console.log("Created token", token.get({ plain: true }));
                 return userAdventure;
-            })
+            });
         })
         .then(userAdventure => {
             return Message.create({
@@ -81,7 +81,7 @@ function createTestDataAsync() {
 
 export default function createTestDataIfEmpty() {
     return database.initialize()
-        .then(db => {
+        .then(() => {
             return User.count();
         })
         .then(count => {
@@ -95,5 +95,7 @@ export default function createTestDataIfEmpty() {
 }
 
 if (!module.parent) {
-    createTestData();
+    createTestDataAsync().then(() => {
+        console.log("Created some test data.");
+    });
 }

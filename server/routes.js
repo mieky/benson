@@ -70,5 +70,5 @@ export function initialize(server) {
         service.getTokens()
             .then(jsonOr404(req, res, next));
 
-    })
+    });
 }
