@@ -23,12 +23,14 @@ node_modules/.bin/jspm install
 npm start
 ```
 
-Then you can browse to http://localhost:8080/, authenticate with Facebook and start messaging,
+Then you can browse to http://localhost:8080/, authenticate with Facebook and start messaging.
 
 ## Todo
 
 Miscellanous thoughts, tech and feature wise. May or may not happen!
 
+- [ ] Travis CI build
+- [ ] setup for easy heroku deployment
 - [ ] post images/smiles
 - [ ] replace Sequelize with Knex + Bookshelf
 - [ ] maybe introduce [Flux](facebook.github.io/flux/)/[alt](https://github.com/goatslacker/alt)?
@@ -37,7 +39,6 @@ Miscellanous thoughts, tech and feature wise. May or may not happen!
 - [ ] keep track of who's in an adventure (validate IDs)
 - [ ] use [PostCSS](https://github.com/postcss/postcss) for styles
 - [ ] join adventures by slug
-- [ ] Travis CI build
 - [ ] use web sockets for polling
 
 ## Acknowledgements
