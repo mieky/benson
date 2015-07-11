@@ -37,7 +37,6 @@ Miscellanous thoughts, tech and feature wise. May or may not happen!
 - [ ] keep track of who's in an adventure (validate IDs)
 - [ ] use [PostCSS](https://github.com/postcss/postcss) for styles
 - [ ] join adventures by slug
-- [ ] npm run scripts for eslint + jscs
 - [ ] Travis CI build
 - [ ] use web sockets for polling
 
