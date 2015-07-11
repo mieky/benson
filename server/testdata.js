@@ -49,11 +49,11 @@ function createAdventurer(options) {
 
 function createTestDataAsync() {
     return Promise.all([
-        User.sync({ force: true }),
-        Adventure.sync({ force: true }),
-        Message.sync({ force: true }),
-        Token.sync({ force: true }),
-        UserAdventures.sync({ force: true })
+        User.sync(),
+        Adventure.sync(),
+        Message.sync(),
+        Token.sync(),
+        UserAdventures.sync()
     ])
         .then(() => {
             return Adventure.create({ name: "A grand voyage" });

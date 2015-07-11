@@ -29,7 +29,7 @@ let Token = sequelize.define("Token", {
 let UserAdventures = sequelize.define("UserAdventures", {});
 
 User.belongsToMany(Adventure, { through: "UserAdventures" });
-Adventure.hasMany(User, { through: "UserAdventures" });
+Adventure.belongsToMany(User, { through: "UserAdventures" });
 
 User.hasMany(Message);
 Adventure.hasMany(Message);
