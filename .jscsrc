@@ -1,6 +1,6 @@
 {
     "esnext": true,
-    
+
     "disallowImplicitTypeConversion": ["string"],
     "disallowMixedSpacesAndTabs": true,
     "disallowMultipleLineBreaks": true,
@@ -67,12 +67,6 @@
     "requireLineFeedAtFileEnd": true,
     "requireSpacesInFunctionExpression": {
         "beforeOpeningCurlyBrace": true
-    },
-
-    "validateJSDoc": {
-        "checkParamNames": false,
-        "checkRedundantParams": false,
-        "requireParamTypes": false
     },
 
     "validateLineBreaks": "LF",
