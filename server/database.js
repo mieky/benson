@@ -1,4 +1,5 @@
 import path from "path";
+import bs58 from "bs58";
 import Promise from "bluebird";
 
 var dbConfig = {
@@ -62,6 +63,7 @@ export function initialize(options) {
                 return bookshelf.knex.schema.createTable("token", table => {
                     table.timestamp("created_at").defaultTo(knex.fn.now());
                     table.string("text");
+                    table.integer("user_id").references("user.id");
                 });
             }
         })
@@ -109,26 +111,64 @@ export function initialize(options) {
         }
     });
 
+    function createUser(options) {
+        var user = new User({
+            "first_name": options["first_name"],
+            "last_name": options["last_name"],
+            "image_url": `https://graph.facebook.com/v2.3/${options["facebook_id"]}/picture?type=square`
+        });
+
+        return user.save()
+            .then(savedUser => {
+                return options.adventure.users().attach(user);
+            })
+            .then(jotain => {
+                let tokenText = bs58.encode(new Buffer(`${user.id};;`));
+                return new Token({
+                    text: tokenText,
+                    "user_id": user.id
+                }).save();
+            });
+    }
+
     if (options.createTestData) {
         return Promise.all(tables)
             .then(() => {
                 console.log("Creating test data...");
 
-                var adventure1 = new Adventure({ name: "A grand voyage "});
-                var user1 = new User({ "first_name": "Frank", "last_name": "Ballston" });
-                var user2 = new User({ "first_name": "Adam", "last_name": "Goggles" });
+                var adventure1 = new Adventure({
+                    name: "A grand voyage"
+                });
 
-                Promise.all([adventure1.save(), user1.save(), user2.save()])
+                adventure1.save()
                     .then(() => {
-                        return adventure1.users().attach([user1, user2]);
+                        return Promise.all([
+                            createUser({
+                                "first_name": "Frank",
+                                "last_name": "Ballston",
+                                "facebook_id": 6,
+                                "adventure": adventure1
+                            }),
+                            createUser({
+                                "first_name": "Demis",
+                                "last_name": "Röyssös",
+                                "facebook_id": 8,
+                                "adventure": adventure1
+                            })
+                        ]);
                     })
                     .then(() => {
-                        Adventure.fetchAll({ withRelated: "users" }).then(advs => {
+                        Adventure.fetchAll({ withRelated: ["users"] }).then(advs => {
                             advs.forEach(a => {
                                 console.log(a.toJSON());
+                                // Just a token printing test
+                                new User({ id: a.toJSON().users[0].id }).fetch({ withRelated: "tokens" }).then(u => {
+                                    console.log(u.toJSON());
+                                });
                             });
                         });
                     });
+
             })
             .catch(err => {
                 console.error(err);
