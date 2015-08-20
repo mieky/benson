@@ -47,4 +47,4 @@ Miscellanous thoughts, tech and feature wise. May or may not happen!
 
 ## License
 
-[MIT](https://github.com/staltz/cycle/blob/master/LICENSE)
+[MIT](https://github.com/mieky/benson/blob/master/LICENSE)
