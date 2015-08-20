@@ -1,54 +1,65 @@
-import Sequelize from "sequelize";
 import path from "path";
+import Promise from "bluebird";
 
-let sequelize = new Sequelize(null, null, null, {
-    dialect: "sqlite",
-    storage: path.resolve(".", "database.sqlite"),
-    logging: false
-});
-
-let User = sequelize.define("User", {
-    firstName: { type: Sequelize.STRING },
-    lastName: { type: Sequelize.STRING },
-    email: { type: Sequelize.STRING },
-    imageUrl: { type: Sequelize.STRING }
-});
-
-let Adventure = sequelize.define("Adventure", {
-    name: { type: Sequelize.STRING }
-});
-
-let Message = sequelize.define("Message", {
-    text: { type: Sequelize.STRING }
-});
-
-let Token = sequelize.define("Token", {
-    text: { type: Sequelize.STRING }
-});
-
-let UserAdventures = sequelize.define("UserAdventures", {});
-
-User.belongsToMany(Adventure, { through: "UserAdventures" });
-Adventure.belongsToMany(User, { through: "UserAdventures" });
-
-User.hasMany(Message);
-Adventure.hasMany(Message);
-
-Message.belongsTo(User);
-Message.belongsTo(Adventure);
-
-User.hasMany(Token);
-Token.belongsTo(User);
-
-function initialize() {
-    return sequelize.sync();
-}
-
-module.exports = {
-    User,
-    Adventure,
-    Message,
-    UserAdventures,
-    Token,
-    initialize
+var dbFile = path.resolve(".", "knex.sqlite");
+var dbConfig = {
+    client: "sqlite3",
+    connection: {
+        filename: dbFile
+    }
 };
+
+let knex = require("knex")(dbConfig);
+let bookshelf = require("bookshelf")(knex);
+
+export function initialize(options) {
+    options = options || {};
+
+    console.log("Initializing database...");
+
+    let User = bookshelf.Model.extend({
+        tableName: "user",
+        adventures: () => {
+            return this.belongsToMany(Adventure);
+        },
+        messages: () => {
+            return this.hasMany(Message);
+        },
+        tokens: () => {
+            return this.hasMany(Token);
+        }
+    });
+
+    let Adventure = bookshelf.Model.extend({
+        tableName: "adventure",
+        messages: () => {
+            return this.hasMany(Message);
+        },
+        users: () => {
+            return this.hasMany(User);
+        }
+    });
+
+    let Message = bookshelf.Model.extend({
+        tableName: "message",
+        adventure: () => {
+            return this.belongsTo(Adventure);
+        },
+        user: () => {
+            return this.belongsTo(User);
+        }
+    });
+
+    let Token = bookshelf.Model.extend({
+        tableName: "token",
+        user: () => {
+            return this.belongsTo(User);
+        }
+    });
+
+    if (options.createTestData) {
+        console.log("Creating test data...");
+    }
+
+    return Promise.resolve();
+}

@@ -4,6 +4,6 @@ node_modules
 app/build.js*
 app/jspm_packages
 app/config.js
-database.sqlite
+*.sqlite
 npm-debug.log
 auth-config.json

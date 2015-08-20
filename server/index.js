@@ -1,10 +1,9 @@
-"use strict";
-
 import express from "express";
 import bodyParser from "body-parser";
 import passport from "passport";
-import createTestDataIfEmpty from "./testdata";
+import Promise from "bluebird";
 
+let database = require("./database");
 let auth = require("./auth");
 let app = express();
 
@@ -15,9 +14,10 @@ app.use(passport.session());
 auth.initialize(app);
 
 require("./routes").initialize(app);
+
 app.use("/", express.static("app"));
 
-createTestDataIfEmpty()
+database.initialize({ createTestData: true })
     .then(() => {
         let server = app.listen(8080, () => {
             let { address, port } = server.address();
